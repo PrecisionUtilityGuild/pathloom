@@ -1,0 +1,104 @@
+[
+  {
+    "schema": {
+      "properties": {
+        "q": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "q"
+      ],
+      "type": "object"
+    },
+    "schemaSource": "runtime_schema",
+    "serverId": "demo-server",
+    "serverVersion": "1.0.0",
+    "toolName": "query"
+  },
+  {
+    "schema": {
+      "properties": {},
+      "type": "object"
+    },
+    "schemaSource": "runtime_schema",
+    "serverId": "demo-server",
+    "serverVersion": "1.0.0",
+    "toolName": "list"
+  },
+  {
+    "schema": {
+      "properties": {
+        "limit": {
+          "type": "number"
+        },
+        "q": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "q"
+      ],
+      "type": "object"
+    },
+    "schemaSource": "runtime_schema",
+    "serverId": "demo-server",
+    "serverVersion": "1.0.0",
+    "toolName": "search"
+  },
+  {
+    "schema": {
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "userId": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "userId"
+      ],
+      "type": "object"
+    },
+    "schemaSource": "runtime_schema",
+    "serverId": "demo-server",
+    "serverVersion": "1.0.0",
+    "toolName": "create"
+  },
+  {
+    "schema": {
+      "properties": {
+        "id": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "type": "object"
+    },
+    "schemaSource": "runtime_schema",
+    "serverId": "demo-server",
+    "serverVersion": "1.0.0",
+    "toolName": "delete_record"
+  },
+  {
+    "schema": {
+      "properties": {
+        "format": {
+          "enum": [
+            "csv",
+            "json"
+          ],
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "schemaSource": "runtime_schema",
+    "serverId": "demo-server",
+    "serverVersion": "1.0.0",
+    "toolName": "bulk_export"
+  }
+]

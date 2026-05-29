@@ -1,0 +1,30 @@
+{
+  "databasePath": "/Users/a14a/Documents/pathloom/.pathloom-datasets/liquid-shadow/pathloom.db",
+  "eligibleFindings": [
+    "dead_tool_detection",
+    "argument_mismatch_patterns",
+    "session_termination_analysis",
+    "sequence_risk_map",
+    "client_divergence",
+    "activation_tool_report"
+  ],
+  "eventCount": 42,
+  "narrowedFindings": [],
+  "readiness": "full",
+  "sourceKey": "logfile:liquid-shadow-dogfood",
+  "sourceKind": "logfile",
+  "suppressedFindings": [],
+  "telemetrySpine": {
+    "sessionization": "explicit_session_id",
+    "firstClassFields": [],
+    "importedMetadata": {
+      "aiModelIdentity": "none",
+      "aiPromptIdentity": "none",
+      "externalAttributeBags": "none",
+      "langfuseSurfaces": "none"
+    },
+    "spanLineage": "none",
+    "traceIdentity": "none"
+  },
+  "toolCatalogSize": 6
+}

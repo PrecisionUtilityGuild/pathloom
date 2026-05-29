@@ -1,0 +1,201 @@
+[
+  {
+    "schema": {
+      "type": "object",
+      "properties": {
+        "repoPath": {
+          "type": "string",
+          "description": "Absolute path to the repository"
+        },
+        "query": {
+          "type": "string",
+          "description": "Search term or semantic intent"
+        },
+        "limit": {
+          "type": "number",
+          "description": "Max results (default 10)"
+        },
+        "offset": {
+          "type": "number",
+          "description": "Pagination offset"
+        },
+        "compact": {
+          "type": "boolean",
+          "description": "Return compact output (no snippets)"
+        },
+        "tokenBudget": {
+          "type": "number",
+          "description": "Optional token budget for adaptive folding of low-relevance matches"
+        },
+        "fileType": {
+          "type": "string",
+          "description": "Filter by extension(s)"
+        },
+        "layer": {
+          "type": "string",
+          "enum": [
+            "Solid",
+            "Liquid",
+            "Virtual",
+            "Intel",
+            "Phantom"
+          ]
+        },
+        "includeTests": {
+          "type": "boolean",
+          "description": "Include test files (Virtual)"
+        }
+      },
+      "required": [
+        "repoPath",
+        "query"
+      ]
+    },
+    "schemaSource": "declared_contract",
+    "serverId": "liquid-shadow-mcp",
+    "serverVersion": "1.0.12",
+    "toolName": "shadow_search_concept"
+  },
+  {
+    "schema": {
+      "type": "object",
+      "properties": {
+        "repoPath": {
+          "type": "string",
+          "description": "Absolute path to the repository"
+        },
+        "query": {
+          "type": "string",
+          "description": "Filename part or path keyword"
+        },
+        "limit": {
+          "type": "number"
+        },
+        "ranked": {
+          "type": "boolean",
+          "description": "Sort results by gravity (high-import files first) and show layer classification (Entry/Logic/Data)"
+        }
+      },
+      "required": [
+        "repoPath",
+        "query"
+      ]
+    },
+    "schemaSource": "declared_contract",
+    "serverId": "liquid-shadow-mcp",
+    "serverVersion": "1.0.12",
+    "toolName": "shadow_search_path"
+  },
+  {
+    "schema": {
+      "type": "object",
+      "properties": {
+        "repoPath": {
+          "type": "string"
+        },
+        "compact": {
+          "type": "boolean",
+          "description": "Return lighter payload (omit full hologram.gravity.hotspots, strategy_graph)"
+        },
+        "branch": {
+          "type": "string",
+          "description": "Optional branch scope for chronicle/context results"
+        },
+        "includeSessionDelta": {
+          "type": "boolean",
+          "description": "If true, include optional \"since last session\" drift summary in response"
+        },
+        "sinceCommit": {
+          "type": "string",
+          "description": "Optional baseline commit for drift summary (defaults to last indexed commit)"
+        }
+      },
+      "required": [
+        "repoPath"
+      ]
+    },
+    "schemaSource": "declared_contract",
+    "serverId": "liquid-shadow-mcp",
+    "serverVersion": "1.0.12",
+    "toolName": "shadow_ops_context"
+  },
+  {
+    "schema": {
+      "type": "object",
+      "properties": {
+        "repoPath": {
+          "type": "string"
+        },
+        "filePath": {
+          "type": "string"
+        },
+        "detailLevel": {
+          "type": "string",
+          "enum": [
+            "structure",
+            "signatures",
+            "summaries",
+            "detailed"
+          ]
+        }
+      },
+      "required": [
+        "repoPath",
+        "filePath"
+      ]
+    },
+    "schemaSource": "declared_contract",
+    "serverId": "liquid-shadow-mcp",
+    "serverVersion": "1.0.12",
+    "toolName": "shadow_inspect_file"
+  },
+  {
+    "schema": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "repoPaths": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "schemaSource": "declared_contract",
+    "serverId": "liquid-shadow-mcp",
+    "serverVersion": "1.0.12",
+    "toolName": "shadow_workspace_status"
+  },
+  {
+    "schema": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "repoPaths": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "apply": {
+          "type": "boolean"
+        },
+        "olderThanDays": {
+          "type": "number"
+        },
+        "includeCustom": {
+          "type": "boolean"
+        }
+      }
+    },
+    "schemaSource": "declared_contract",
+    "serverId": "liquid-shadow-mcp",
+    "serverVersion": "1.0.12",
+    "toolName": "shadow_workspace_gc"
+  }
+]

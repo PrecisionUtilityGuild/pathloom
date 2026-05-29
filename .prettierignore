@@ -1,0 +1,6 @@
+fixtures/goldens/**
+fixtures/demo-pack/**
+node_modules/**
+.pathloom/**
+.pathloom-datasets/**
+dist/**

@@ -1,0 +1,7 @@
+Pathloom snapshot saved: logfile:liquid-shadow-dogfood@20260529T074046834Z
+Source: logfile:liquid-shadow-dogfood
+Captured: 2026-05-29T07:40:46.834Z
+Label: liquid-shadow-dogfood
+Ready findings: 6  Clear findings: 0  Suppressed findings: 0
+Bundle directory: /Users/a14a/Documents/pathloom/.pathloom-datasets/liquid-shadow/snapshots/logfile-liquid-shadow-dogfood-20260529T074046834Z
+Bundle manifest: /Users/a14a/Documents/pathloom/.pathloom-datasets/liquid-shadow/snapshots/logfile-liquid-shadow-dogfood-20260529T074046834Z/bundle.json

@@ -1,0 +1,606 @@
+{
+  "dataset": {
+    "actorIdentityMode": "stable_actor",
+    "readiness": "full",
+    "sourceKind": "wrapper",
+    "sourceKey": "wrapper:demo",
+    "telemetrySpine": {
+      "sessionization": "explicit_session_id",
+      "firstClassFields": [],
+      "importedMetadata": {
+        "aiModelIdentity": "none",
+        "aiPromptIdentity": "none",
+        "externalAttributeBags": "none",
+        "langfuseSurfaces": "none"
+      },
+      "spanLineage": "none",
+      "traceIdentity": "none"
+    },
+    "toolCatalogAuthority": "runtime_registration"
+  },
+  "findings": [
+    {
+      "blockedBy": [],
+      "evidence": {
+        "candidateSignalCount": 2,
+        "credibleSignalCount": 1,
+        "diagnostics": {
+          "actorLinkage": {
+            "linkedActorCount": 23,
+            "requirement": "privacy_safe_stable_actor",
+            "status": "observed"
+          },
+          "comparisonBasis": "first_session_exposure_vs_skip_within_linked_actor_cohorts",
+          "confoundingRisk": {
+            "level": "high",
+            "reasons": [
+              "tool exposure is observational rather than randomized",
+              "actors who use a tool may differ from the control cohort before exposure",
+              "invoked-at gaps are descriptive timing only, not elapsed-time causal windows"
+            ]
+          },
+          "interpretation": "linked_cohort_association_only",
+          "returnWindow": {
+            "aggregate": {
+              "immediateNextSessionReturns": 6,
+              "medianInvokedAtGapToReturn": 8,
+              "returningActorCount": 6,
+              "sustainedMultiSessionReturns": 0
+            },
+            "claimBoundary": "not_incremental_effect_not_causal",
+            "kind": "next_observed_session",
+            "label": "second_observed_session",
+            "timingMode": "session_order_plus_invoked_at_gap",
+            "explanation": "Return means the actor had a later observed session. Pathloom also reports immediate (exactly two sessions) vs sustained (three or more) return shapes and median invoked-at gap between first and second sessions when timestamps exist. This is still observational — not incremental lift or causal timing."
+          },
+          "signalTaxonomy": {
+            "candidate": "candidate_return_correlate",
+            "credible": "credible_cohort_signal",
+            "future": "incremental_effect_estimate"
+          }
+        },
+        "linkedActorCount": 23,
+        "returningActorCount": 6,
+        "toolsObservedInFirstSessions": 4
+      },
+      "id": "activation_tool_report",
+      "items": [
+        {
+          "cohortContext": {
+            "cohortSemantics": "first_session_exposure_vs_linked_control_without_exposure",
+            "comparisonId": "activation:query:first_session_exposure",
+            "controlActorCount": 17,
+            "controlCohortLabel": "linked actors without query in their first observed session",
+            "controlReturnRate": 0.06,
+            "exposedActorCount": 6,
+            "exposureCohortLabel": "linked actors who invoked query in their first observed session",
+            "exposedReturnRate": 0.83,
+            "returnWindow": {
+              "immediateNextSessionReturns": 5,
+              "kind": "next_observed_session",
+              "label": "second_observed_session",
+              "medianInvokedAtGapToReturn": 8,
+              "sustainedMultiSessionReturns": 0
+            }
+          },
+          "confidenceBand": {
+            "controlLower": 0.01,
+            "controlUpper": 0.27,
+            "exposedLower": 0.44,
+            "exposedUpper": 0.97
+          },
+          "controlActors": 17,
+          "controlReturnRate": 0.06,
+          "exposedActors": 6,
+          "exposedReturnRate": 0.83,
+          "issueType": "activation_tool",
+          "returnedActors": 5,
+          "returnRateDelta": 0.77,
+          "returnRateMultiplier": 14.17,
+          "signalClass": "credible_cohort_signal",
+          "toolName": "query"
+        }
+      ],
+      "recommendation": "Surface this tool earlier in onboarding and make its value legible, because it is the strongest confidence-backed cohort return signal in this dataset.",
+      "severity": "warning",
+      "status": "ready",
+      "summary": "query correlated with 83% second-session return in the linked cohort at 14.17x the return rate of the rest of the cohort.",
+      "title": "Activation tool report",
+      "uncertainty": {
+        "allowedClaims": [
+          "activation_correlations"
+        ],
+        "blockedBy": [],
+        "claimScope": "full",
+        "claimScopeLabel": "full claim",
+        "explanation": "The dataset supported the full claim, and the observed pattern cleared the emission threshold.",
+        "headline": "Credible finding",
+        "label": "Credible finding",
+        "level": "credible",
+        "rationale": "Dataset supports privacy-safe return-cohort analysis for activation-style findings.",
+        "supportStatus": "eligible"
+      }
+    },
+    {
+      "blockedBy": [],
+      "evidence": {
+        "baselineErrorRate": 0.2,
+        "crossClientReusablePathCount": 0,
+        "failureEndpointCount": 2,
+        "baselineSuccessRate": 0.8,
+        "sequencePatternsObserved": 4,
+        "successEndpointCount": 2
+      },
+      "id": "sequence_risk_map",
+      "items": [
+        {
+          "baselineErrorRate": 0,
+          "baselineKind": "matched_suffix_peers",
+          "clientSpread": {
+            "clientHints": [
+              "cursor"
+            ],
+            "transferableClientCount": 1,
+            "transferability": "single_client"
+          },
+          "errorLift": 1,
+          "errorRate": 1,
+          "endpoint": {
+            "label": "create failure endpoint",
+            "question": "What reliably precedes create failures?",
+            "terminalTool": "create",
+            "type": "failure_endpoint"
+          },
+          "globalBaselineErrorRate": 0.2,
+          "observationCount": 3,
+          "pathKind": "risky_sequence",
+          "peerObservationCount": 3,
+          "peerCohorts": {
+            "matchedSuffixPeers": {
+              "label": "other routes into create",
+              "observationCount": 3,
+              "rate": 0,
+              "sequenceLabels": [
+                "list -> create"
+              ]
+            },
+            "terminalToolPeers": {
+              "label": "other routes ending at create",
+              "observationCount": 6,
+              "rate": 0.33
+            }
+          },
+          "prefix": [
+            "search"
+          ],
+          "prefixLabel": "search",
+          "prefixLength": 1,
+          "sequence": [
+            "search",
+            "create"
+          ],
+          "sequenceLabel": "search -> create",
+          "sessionCount": 3,
+          "terminalToolBaselineErrorRate": 0.33,
+          "terminalToolErrorLift": 0.67,
+          "trajectoryContext": {
+            "cohortSemantics": "ordered_paths_sharing_terminal_tool_and_suffix_peer_bucket_excludes_focus_path",
+            "familyDistinctPathCount": 2,
+            "familyId": "terminal:create:suffix_tail:create:len:2:risky_sequence",
+            "familyLabel": "other routes into create",
+            "peerObservationCount": 3,
+            "suffixBucketObservationCount": 6,
+            "windowLength": 2
+          }
+        },
+        {
+          "baselineErrorRate": 0,
+          "baselineKind": "matched_suffix_peers",
+          "clientSpread": {
+            "clientHints": [
+              "claude-desktop"
+            ],
+            "transferableClientCount": 1,
+            "transferability": "single_client"
+          },
+          "errorLift": 1,
+          "errorRate": 1,
+          "endpoint": {
+            "label": "list failure endpoint",
+            "question": "What reliably precedes list failures?",
+            "terminalTool": "list",
+            "type": "failure_endpoint"
+          },
+          "globalBaselineErrorRate": 0.2,
+          "observationCount": 3,
+          "pathKind": "risky_sequence",
+          "peerObservationCount": 11,
+          "peerCohorts": {
+            "matchedSuffixPeers": {
+              "label": "other routes into list",
+              "observationCount": 11,
+              "rate": 0,
+              "sequenceLabels": [
+                "query -> list"
+              ]
+            },
+            "terminalToolPeers": {
+              "label": "other routes ending at list",
+              "observationCount": 17,
+              "rate": 0
+            }
+          },
+          "prefix": [
+            "search"
+          ],
+          "prefixLabel": "search",
+          "prefixLength": 1,
+          "sequence": [
+            "search",
+            "list"
+          ],
+          "sequenceLabel": "search -> list",
+          "sessionCount": 3,
+          "terminalToolBaselineErrorRate": 0,
+          "terminalToolErrorLift": 1,
+          "trajectoryContext": {
+            "cohortSemantics": "ordered_paths_sharing_terminal_tool_and_suffix_peer_bucket_excludes_focus_path",
+            "familyDistinctPathCount": 2,
+            "familyId": "terminal:list:suffix_tail:list:len:2:risky_sequence",
+            "familyLabel": "other routes into list",
+            "peerObservationCount": 11,
+            "suffixBucketObservationCount": 14,
+            "windowLength": 2
+          }
+        },
+        {
+          "baselineKind": "matched_suffix_peers",
+          "baselineSuccessRate": 0,
+          "clientSpread": {
+            "clientHints": [
+              "claude-desktop"
+            ],
+            "transferableClientCount": 1,
+            "transferability": "single_client"
+          },
+          "endpoint": {
+            "label": "list success endpoint",
+            "question": "What reusable path reliably lands list success?",
+            "terminalTool": "list",
+            "type": "success_endpoint"
+          },
+          "globalBaselineSuccessRate": 0.8,
+          "observationCount": 11,
+          "pathKind": "golden_path",
+          "peerObservationCount": 3,
+          "peerCohorts": {
+            "matchedSuffixPeers": {
+              "label": "other routes into list",
+              "observationCount": 3,
+              "rate": 0,
+              "sequenceLabels": [
+                "search -> list"
+              ]
+            },
+            "terminalToolPeers": {
+              "label": "other routes ending at list",
+              "observationCount": 9,
+              "rate": 0.67
+            }
+          },
+          "prefix": [
+            "query"
+          ],
+          "prefixLabel": "query",
+          "prefixLength": 1,
+          "sequence": [
+            "query",
+            "list"
+          ],
+          "sequenceLabel": "query -> list",
+          "sessionCount": 11,
+          "successLift": 1,
+          "successRate": 1,
+          "terminalToolBaselineSuccessRate": 0.67,
+          "terminalToolSuccessLift": 0.33,
+          "trajectoryContext": {
+            "cohortSemantics": "ordered_paths_sharing_terminal_tool_and_suffix_peer_bucket_excludes_focus_path",
+            "familyDistinctPathCount": 2,
+            "familyId": "terminal:list:suffix_tail:list:len:2:golden_path",
+            "familyLabel": "other routes into list",
+            "peerObservationCount": 3,
+            "suffixBucketObservationCount": 14,
+            "windowLength": 2
+          }
+        },
+        {
+          "baselineKind": "matched_suffix_peers",
+          "baselineSuccessRate": 0,
+          "clientSpread": {
+            "clientHints": [
+              "claude-desktop"
+            ],
+            "transferableClientCount": 1,
+            "transferability": "single_client"
+          },
+          "endpoint": {
+            "label": "create success endpoint",
+            "question": "What reusable path reliably lands create success?",
+            "terminalTool": "create",
+            "type": "success_endpoint"
+          },
+          "globalBaselineSuccessRate": 0.8,
+          "observationCount": 3,
+          "pathKind": "golden_path",
+          "peerObservationCount": 3,
+          "peerCohorts": {
+            "matchedSuffixPeers": {
+              "label": "other routes into create",
+              "observationCount": 3,
+              "rate": 0,
+              "sequenceLabels": [
+                "search -> create"
+              ]
+            },
+            "terminalToolPeers": {
+              "label": "other routes ending at create",
+              "observationCount": 6,
+              "rate": 0.17
+            }
+          },
+          "prefix": [
+            "list"
+          ],
+          "prefixLabel": "list",
+          "prefixLength": 1,
+          "sequence": [
+            "list",
+            "create"
+          ],
+          "sequenceLabel": "list -> create",
+          "sessionCount": 3,
+          "successLift": 1,
+          "successRate": 1,
+          "terminalToolBaselineSuccessRate": 0.17,
+          "terminalToolSuccessLift": 0.83,
+          "trajectoryContext": {
+            "cohortSemantics": "ordered_paths_sharing_terminal_tool_and_suffix_peer_bucket_excludes_focus_path",
+            "familyDistinctPathCount": 2,
+            "familyId": "terminal:create:suffix_tail:create:len:2:golden_path",
+            "familyLabel": "other routes into create",
+            "peerObservationCount": 3,
+            "suffixBucketObservationCount": 6,
+            "windowLength": 2
+          }
+        }
+      ],
+      "recommendation": "Focus on the highest-lift failure endpoint first. Tighten the handoff into that terminal tool or add a safer bridge before the failing step.",
+      "severity": "warning",
+      "status": "ready",
+      "summary": "2 targeted failure paths and 2 reusable success paths crossed the emission threshold.",
+      "title": "Sequence risk map (4)",
+      "uncertainty": {
+        "allowedClaims": [
+          "risky_sequences",
+          "golden_paths"
+        ],
+        "blockedBy": [],
+        "claimScope": "full",
+        "claimScopeLabel": "full claim",
+        "explanation": "The dataset supported the full claim, and the observed pattern cleared the emission threshold.",
+        "headline": "Credible finding",
+        "label": "Credible finding",
+        "level": "credible",
+        "rationale": "Dataset supports comparing sequence outcomes against baseline behavior.",
+        "supportStatus": "eligible"
+      }
+    },
+    {
+      "blockedBy": [],
+      "evidence": {
+        "catalogSize": 6,
+        "confidence": "high",
+        "sessionCount": 29
+      },
+      "id": "dead_tool_detection",
+      "items": [
+        {
+          "callCount": 0,
+          "confidence": "high",
+          "serverId": "demo-server",
+          "serverVersion": "1.0.0",
+          "toolName": "bulk_export"
+        },
+        {
+          "callCount": 0,
+          "confidence": "high",
+          "serverId": "demo-server",
+          "serverVersion": "1.0.0",
+          "toolName": "delete_record"
+        }
+      ],
+      "recommendation": "Remove these tools, rename them, or improve their descriptions before adding more surface area.",
+      "severity": "warning",
+      "status": "ready",
+      "summary": "2 registered tools had zero calls across 29 sessions.",
+      "title": "Dead tools (2)",
+      "uncertainty": {
+        "allowedClaims": [
+          "unused_registered_tools"
+        ],
+        "blockedBy": [],
+        "claimScope": "full",
+        "claimScopeLabel": "full claim",
+        "explanation": "The dataset supported the full claim, and the observed pattern cleared the emission threshold.",
+        "headline": "Credible finding",
+        "label": "Credible finding",
+        "level": "credible",
+        "rationale": "Dataset can support unused-tool claims because the registered tool inventory is authoritative.",
+        "supportStatus": "eligible"
+      }
+    },
+    {
+      "blockedBy": [],
+      "evidence": {
+        "comparableClients": [
+          "claude-desktop",
+          "cursor"
+        ]
+      },
+      "id": "client_divergence",
+      "items": [
+        {
+          "avgToolsPerSession": 2,
+          "baselineSuccessRate": 0.84,
+          "baselineToolsPerSession": 1.65,
+          "clientHint": "cursor",
+          "eventCount": 6,
+          "issueType": "client_outlier",
+          "sessionCount": 3,
+          "successGap": 0.34,
+          "successRate": 0.5,
+          "toolsGap": -0.35
+        },
+        {
+          "baselineToolErrorRate": 0.33,
+          "clientErrorRate": 1,
+          "clientHint": "cursor",
+          "errorGap": 0.67,
+          "issueType": "tool_outlier",
+          "observationCount": 3,
+          "overallClientOutlier": true,
+          "toolName": "create"
+        }
+      ],
+      "recommendation": "Review the worst client-specific path first. Divergence this large usually means descriptions, examples, or affordances are landing differently across clients.",
+      "severity": "warning",
+      "status": "ready",
+      "summary": "2 client-level divergence patterns crossed the emission threshold.",
+      "title": "Client divergence (2)",
+      "uncertainty": {
+        "allowedClaims": [
+          "client_comparisons"
+        ],
+        "blockedBy": [],
+        "claimScope": "full",
+        "claimScopeLabel": "full claim",
+        "explanation": "The dataset supported the full claim, and the observed pattern cleared the emission threshold.",
+        "headline": "Credible finding",
+        "label": "Credible finding",
+        "level": "credible",
+        "rationale": "Dataset can compare tool usage and outcomes across normalized clients.",
+        "supportStatus": "eligible"
+      }
+    },
+    {
+      "blockedBy": [],
+      "evidence": {
+        "supportMode": "eligible",
+        "toolsObserved": 6
+      },
+      "id": "argument_mismatch_patterns",
+      "items": [
+        {
+          "argumentName": "userId",
+          "issueType": "missing_required_argument",
+          "mismatchCount": 5,
+          "mismatchRate": 0.56,
+          "observationCount": 9,
+          "recommendation": "Clarify this argument in the tool description or make the schema easier for models to satisfy.",
+          "toolName": "create"
+        },
+        {
+          "argumentName": "limit",
+          "expected": "number",
+          "issueType": "wrong_argument_type_or_shape",
+          "mismatchCount": 3,
+          "mismatchRate": 0.33,
+          "observationCount": 9,
+          "observedExample": "array:string",
+          "recommendation": "Models are sending the wrong shape here. Tighten the schema wording or simplify the accepted shape.",
+          "totalToolObservations": 9,
+          "toolName": "search"
+        }
+      ],
+      "recommendation": "Improve the descriptions or schemas for the highest-rate mismatches before shipping more tools around them.",
+      "severity": "warning",
+      "status": "ready",
+      "summary": "2 recurring argument mismatch patterns crossed the emission threshold.",
+      "title": "Argument mismatch patterns (2)",
+      "uncertainty": {
+        "allowedClaims": [
+          "missing_required_arguments",
+          "wrong_argument_type_or_shape",
+          "invalid_argument_value"
+        ],
+        "blockedBy": [],
+        "claimScope": "full",
+        "claimScopeLabel": "full claim",
+        "explanation": "The dataset supported the full claim, and the observed pattern cleared the emission threshold.",
+        "headline": "Credible finding",
+        "label": "Credible finding",
+        "level": "credible",
+        "rationale": "Dataset can compare expected schema against observed arguments with enough fidelity for typed mismatch claims.",
+        "supportStatus": "eligible"
+      }
+    },
+    {
+      "blockedBy": [],
+      "evidence": {
+        "medianSessionLength": 2,
+        "sessionCount": 29,
+        "topTerminationTool": "list"
+      },
+      "id": "session_termination_analysis",
+      "items": [
+        {
+          "classification": "possible_dead_end",
+          "medianSessionLengthAtTermination": 2,
+          "sessionsEndingHere": 9,
+          "sessionsReachingTool": 9,
+          "terminationRate": 1,
+          "toolName": "create"
+        },
+        {
+          "classification": "possible_dead_end",
+          "medianSessionLengthAtTermination": 2,
+          "sessionsEndingHere": 17,
+          "sessionsReachingTool": 20,
+          "terminationRate": 0.85,
+          "toolName": "list"
+        }
+      ],
+      "recommendation": "Shorten the path into a successful next action after this tool, or make the expected follow-up clearer.",
+      "severity": "warning",
+      "status": "ready",
+      "summary": "list was the most common termination tool, and 2 candidate dead-end patterns crossed the emission threshold.",
+      "title": "Session termination analysis (2)",
+      "uncertainty": {
+        "allowedClaims": [
+          "session_dead_ends"
+        ],
+        "blockedBy": [],
+        "claimScope": "full",
+        "claimScopeLabel": "full claim",
+        "explanation": "The dataset supported the full claim, and the observed pattern cleared the emission threshold.",
+        "headline": "Credible finding",
+        "label": "Credible finding",
+        "level": "credible",
+        "rationale": "Dataset supports identifying where sessions end and which tools correlate with dead ends.",
+        "supportStatus": "eligible"
+      }
+    }
+  ],
+  "generatedAt": "<generated-at>",
+  "reportVersion": "1.0",
+  "sourceKey": "wrapper:demo",
+  "summary": {
+    "clearFindingCount": 0,
+    "eventCount": 49,
+    "readyFindingCount": 6,
+    "sessionCount": 29,
+    "suppressedFindingCount": 0,
+    "toolCatalogSize": 6
+  },
+  "suppressedFindings": []
+}

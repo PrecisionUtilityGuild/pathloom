@@ -1,0 +1,120 @@
+{
+  "name": "@precisionutilityguild/pathloom",
+  "version": "1.0.0",
+  "description": "Credibility-first MCP telemetry analysis and CI gate for server authors.",
+  "type": "commonjs",
+  "engines": {
+    "node": ">=20"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pugstro/pathloom.git"
+  },
+  "homepage": "https://github.com/pugstro/pathloom#readme",
+  "bugs": {
+    "url": "https://github.com/pugstro/pathloom/issues"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "bin": {
+    "pathloom": "./dist/bin/pathloom.js"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "require": "./dist/index.js",
+      "default": "./dist/index.js"
+    },
+    "./contracts": {
+      "types": "./dist/src/contracts/index.d.ts",
+      "require": "./dist/src/contracts/index.js",
+      "default": "./dist/src/contracts/index.js"
+    },
+    "./core": {
+      "types": "./dist/src/core/index.d.ts",
+      "require": "./dist/src/core/index.js",
+      "default": "./dist/src/core/index.js"
+    },
+    "./feedback": {
+      "types": "./dist/src/feedback/index.d.ts",
+      "require": "./dist/src/feedback/index.js",
+      "default": "./dist/src/feedback/index.js"
+    },
+    "./history": {
+      "types": "./dist/src/history/index.d.ts",
+      "require": "./dist/src/history/index.js",
+      "default": "./dist/src/history/index.js"
+    },
+    "./insights": {
+      "types": "./dist/src/insights/index.d.ts",
+      "require": "./dist/src/insights/index.js",
+      "default": "./dist/src/insights/index.js"
+    },
+    "./logfile": {
+      "types": "./dist/src/logfile/index.d.ts",
+      "require": "./dist/src/logfile/index.js",
+      "default": "./dist/src/logfile/index.js"
+    },
+    "./otel": {
+      "types": "./dist/src/otel/index.d.ts",
+      "require": "./dist/src/otel/index.js",
+      "default": "./dist/src/otel/index.js"
+    },
+    "./report": {
+      "types": "./dist/src/report/index.d.ts",
+      "require": "./dist/src/report/index.js",
+      "default": "./dist/src/report/index.js"
+    },
+    "./uncertainty": {
+      "types": "./dist/src/uncertainty/index.d.ts",
+      "require": "./dist/src/uncertainty/index.js",
+      "default": "./dist/src/uncertainty/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "postbuild": "chmod +x dist/bin/pathloom.js",
+    "demo-pack:build": "npm run build && node dist/scripts/build-demo-pack.js",
+    "dogfood:liquid-shadow": "npm run build && node dist/scripts/dogfood-liquid-shadow.js",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "prepack": "npm run verify:package-contract",
+    "prepublishOnly": "npm test",
+    "test": "npm run build && node --test dist/tests/*.test.js",
+    "test:calibration": "npm run build && node --test dist/tests/calibrationHarness.test.js",
+    "test:contract": "npm run build && node --test dist/tests/analysisContract.test.js",
+    "test:credibility": "npm run build && node --test dist/tests/credibilityHarness.test.js",
+    "test:demo-pack": "npm run build && node --test dist/tests/demoPack.test.js",
+    "test:field-validation": "npm run build && node --test dist/tests/fieldValidationHarness.test.js",
+    "typecheck": "tsc -p tsconfig.typecheck.json",
+    "verify:package-contract": "npm run build && node dist/scripts/verify-package-contract.js"
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "telemetry",
+    "cli",
+    "sqlite",
+    "otel",
+    "credibility",
+    "product-analytics"
+  ],
+  "author": "Precision Utility Guild (https://github.com/PrecisionUtilityGuild)",
+  "license": "ISC",
+  "dependencies": {
+    "better-sqlite3": "^12.10.0"
+  },
+  "devDependencies": {
+    "@types/node": "^25.9.1",
+    "prettier": "^3.8.3",
+    "typescript": "^6.0.3"
+  }
+}

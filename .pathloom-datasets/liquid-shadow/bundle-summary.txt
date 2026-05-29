@@ -1,0 +1,7 @@
+Pathloom bundle written to /Users/a14a/Documents/pathloom/.pathloom-datasets/liquid-shadow/bundle
+6 ready findings, 0 clear findings, 0 suppressed findings, for logfile:liquid-shadow-dogfood across 18 sessions.
+
+Share summary: /Users/a14a/Documents/pathloom/.pathloom-datasets/liquid-shadow/bundle/share-summary.md
+Markdown report: /Users/a14a/Documents/pathloom/.pathloom-datasets/liquid-shadow/bundle/report.md
+JSON report: /Users/a14a/Documents/pathloom/.pathloom-datasets/liquid-shadow/bundle/report.json
+Bundle manifest: /Users/a14a/Documents/pathloom/.pathloom-datasets/liquid-shadow/bundle/bundle.json

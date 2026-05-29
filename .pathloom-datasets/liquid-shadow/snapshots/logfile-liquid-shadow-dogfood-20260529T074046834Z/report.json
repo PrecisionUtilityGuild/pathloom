@@ -1,0 +1,486 @@
+{
+  "dataset": {
+    "actorIdentityMode": "stable_actor",
+    "readiness": "full",
+    "sourceKind": "logfile",
+    "sourceKey": "logfile:liquid-shadow-dogfood",
+    "telemetrySpine": {
+      "sessionization": "explicit_session_id",
+      "firstClassFields": [],
+      "importedMetadata": {
+        "aiModelIdentity": "none",
+        "aiPromptIdentity": "none",
+        "externalAttributeBags": "none",
+        "langfuseSurfaces": "none"
+      },
+      "spanLineage": "none",
+      "traceIdentity": "none"
+    },
+    "toolCatalogAuthority": "external_catalog"
+  },
+  "findings": [
+    {
+      "blockedBy": [],
+      "evidence": {
+        "candidateSignalCount": 2,
+        "credibleSignalCount": 2,
+        "diagnostics": {
+          "actorLinkage": {
+            "linkedActorCount": 12,
+            "requirement": "privacy_safe_stable_actor",
+            "status": "observed"
+          },
+          "comparisonBasis": "first_session_exposure_vs_skip_within_linked_actor_cohorts",
+          "confoundingRisk": {
+            "level": "high",
+            "reasons": [
+              "tool exposure is observational rather than randomized",
+              "actors who use a tool may differ from the control cohort before exposure",
+              "invoked-at gaps are descriptive timing only, not elapsed-time causal windows"
+            ]
+          },
+          "interpretation": "linked_cohort_association_only",
+          "returnWindow": {
+            "aggregate": {
+              "immediateNextSessionReturns": 6,
+              "medianInvokedAtGapToReturn": 1135,
+              "returningActorCount": 6,
+              "sustainedMultiSessionReturns": 0
+            },
+            "claimBoundary": "not_incremental_effect_not_causal",
+            "kind": "next_observed_session",
+            "label": "second_observed_session",
+            "timingMode": "session_order_plus_invoked_at_gap",
+            "explanation": "Return means the actor had a later observed session. Pathloom also reports immediate (exactly two sessions) vs sustained (three or more) return shapes and median invoked-at gap between first and second sessions when timestamps exist. This is still observational — not incremental lift or causal timing."
+          },
+          "signalTaxonomy": {
+            "candidate": "candidate_return_correlate",
+            "credible": "credible_cohort_signal",
+            "future": "incremental_effect_estimate"
+          }
+        },
+        "linkedActorCount": 12,
+        "returningActorCount": 6,
+        "toolsObservedInFirstSessions": 4
+      },
+      "id": "activation_tool_report",
+      "items": [
+        {
+          "cohortContext": {
+            "cohortSemantics": "first_session_exposure_vs_linked_control_without_exposure",
+            "comparisonId": "activation:shadow_ops_context:first_session_exposure",
+            "controlActorCount": 6,
+            "controlCohortLabel": "linked actors without shadow_ops_context in their first observed session",
+            "controlReturnRate": 0,
+            "exposedActorCount": 6,
+            "exposureCohortLabel": "linked actors who invoked shadow_ops_context in their first observed session",
+            "exposedReturnRate": 1,
+            "returnWindow": {
+              "immediateNextSessionReturns": 6,
+              "kind": "next_observed_session",
+              "label": "second_observed_session",
+              "medianInvokedAtGapToReturn": 1135,
+              "sustainedMultiSessionReturns": 0
+            }
+          },
+          "confidenceBand": {
+            "controlLower": 0,
+            "controlUpper": 0.39,
+            "exposedLower": 0.61,
+            "exposedUpper": 1
+          },
+          "controlActors": 6,
+          "controlReturnRate": 0,
+          "exposedActors": 6,
+          "exposedReturnRate": 1,
+          "issueType": "activation_tool",
+          "returnedActors": 6,
+          "returnRateDelta": 1,
+          "returnRateMultiplier": null,
+          "signalClass": "credible_cohort_signal",
+          "toolName": "shadow_ops_context"
+        }
+      ],
+      "recommendation": "Surface this tool earlier in onboarding and make its value legible, because it is the strongest confidence-backed cohort return signal in this dataset.",
+      "severity": "warning",
+      "status": "ready",
+      "summary": "shadow_ops_context correlated with 100% second-session return in the linked cohort with no control-group returns observed.",
+      "title": "Activation tool report",
+      "uncertainty": {
+        "allowedClaims": [
+          "activation_correlations"
+        ],
+        "blockedBy": [],
+        "claimScope": "full",
+        "claimScopeLabel": "full claim",
+        "explanation": "The dataset supported the full claim, and the observed pattern cleared the emission threshold.",
+        "headline": "Credible finding",
+        "label": "Credible finding",
+        "level": "credible",
+        "rationale": "Dataset supports privacy-safe return-cohort analysis for activation-style findings.",
+        "supportStatus": "eligible"
+      }
+    },
+    {
+      "blockedBy": [],
+      "evidence": {
+        "catalogSize": 6,
+        "confidence": "medium",
+        "sessionCount": 18
+      },
+      "id": "dead_tool_detection",
+      "items": [
+        {
+          "callCount": 0,
+          "confidence": "medium",
+          "serverId": "liquid-shadow-mcp",
+          "serverVersion": "1.0.12",
+          "toolName": "shadow_workspace_gc"
+        },
+        {
+          "callCount": 0,
+          "confidence": "medium",
+          "serverId": "liquid-shadow-mcp",
+          "serverVersion": "1.0.12",
+          "toolName": "shadow_workspace_status"
+        }
+      ],
+      "recommendation": "Remove these tools, rename them, or improve their descriptions before adding more surface area.",
+      "severity": "warning",
+      "status": "ready",
+      "summary": "2 registered tools had zero calls across 18 sessions.",
+      "title": "Dead tools (2)",
+      "uncertainty": {
+        "allowedClaims": [
+          "unused_registered_tools"
+        ],
+        "blockedBy": [],
+        "claimScope": "full",
+        "claimScopeLabel": "full claim",
+        "explanation": "The dataset supported the full claim, and the observed pattern cleared the emission threshold.",
+        "headline": "Credible finding",
+        "label": "Credible finding",
+        "level": "credible",
+        "rationale": "Dataset can support unused-tool claims because the registered tool inventory is authoritative.",
+        "supportStatus": "eligible"
+      }
+    },
+    {
+      "blockedBy": [],
+      "evidence": {
+        "baselineErrorRate": 0.14,
+        "crossClientReusablePathCount": 0,
+        "failureEndpointCount": 1,
+        "baselineSuccessRate": 0.86,
+        "sequencePatternsObserved": 5,
+        "successEndpointCount": 1
+      },
+      "id": "sequence_risk_map",
+      "items": [
+        {
+          "baselineErrorRate": 0,
+          "baselineKind": "matched_suffix_peers",
+          "clientSpread": {
+            "clientHints": [
+              "cursor"
+            ],
+            "transferableClientCount": 1,
+            "transferability": "single_client"
+          },
+          "errorLift": 1,
+          "errorRate": 1,
+          "endpoint": {
+            "label": "shadow_inspect_file failure endpoint",
+            "question": "What reliably precedes shadow_inspect_file failures?",
+            "terminalTool": "shadow_inspect_file",
+            "type": "failure_endpoint"
+          },
+          "globalBaselineErrorRate": 0.14,
+          "observationCount": 6,
+          "pathKind": "risky_sequence",
+          "peerObservationCount": 6,
+          "peerCohorts": {
+            "matchedSuffixPeers": {
+              "label": "other routes into shadow_inspect_file",
+              "observationCount": 6,
+              "rate": 0,
+              "sequenceLabels": [
+                "shadow_search_concept -> shadow_inspect_file"
+              ]
+            },
+            "terminalToolPeers": {
+              "label": "other routes ending at shadow_inspect_file",
+              "observationCount": 6,
+              "rate": 0
+            }
+          },
+          "prefix": [
+            "shadow_search_path"
+          ],
+          "prefixLabel": "shadow_search_path",
+          "prefixLength": 1,
+          "sequence": [
+            "shadow_search_path",
+            "shadow_inspect_file"
+          ],
+          "sequenceLabel": "shadow_search_path -> shadow_inspect_file",
+          "sessionCount": 6,
+          "terminalToolBaselineErrorRate": 0,
+          "terminalToolErrorLift": 1,
+          "trajectoryContext": {
+            "cohortSemantics": "ordered_paths_sharing_terminal_tool_and_suffix_peer_bucket_excludes_focus_path",
+            "familyDistinctPathCount": 2,
+            "familyId": "terminal:shadow_inspect_file:suffix_tail:shadow_inspect_file:len:2:risky_sequence",
+            "familyLabel": "other routes into shadow_inspect_file",
+            "peerObservationCount": 6,
+            "suffixBucketObservationCount": 12,
+            "windowLength": 2
+          }
+        },
+        {
+          "baselineKind": "matched_suffix_peers",
+          "baselineSuccessRate": 0,
+          "clientSpread": {
+            "clientHints": [
+              "claude-desktop"
+            ],
+            "transferableClientCount": 1,
+            "transferability": "single_client"
+          },
+          "endpoint": {
+            "label": "shadow_inspect_file success endpoint",
+            "question": "What reusable path reliably lands shadow_inspect_file success?",
+            "terminalTool": "shadow_inspect_file",
+            "type": "success_endpoint"
+          },
+          "globalBaselineSuccessRate": 0.86,
+          "observationCount": 6,
+          "pathKind": "golden_path",
+          "peerObservationCount": 6,
+          "peerCohorts": {
+            "matchedSuffixPeers": {
+              "label": "other routes into shadow_inspect_file",
+              "observationCount": 6,
+              "rate": 0,
+              "sequenceLabels": [
+                "shadow_search_path -> shadow_inspect_file"
+              ]
+            },
+            "terminalToolPeers": {
+              "label": "other routes ending at shadow_inspect_file",
+              "observationCount": 6,
+              "rate": 0
+            }
+          },
+          "prefix": [
+            "shadow_search_concept"
+          ],
+          "prefixLabel": "shadow_search_concept",
+          "prefixLength": 1,
+          "sequence": [
+            "shadow_search_concept",
+            "shadow_inspect_file"
+          ],
+          "sequenceLabel": "shadow_search_concept -> shadow_inspect_file",
+          "sessionCount": 6,
+          "successLift": 1,
+          "successRate": 1,
+          "terminalToolBaselineSuccessRate": 0,
+          "terminalToolSuccessLift": 1,
+          "trajectoryContext": {
+            "cohortSemantics": "ordered_paths_sharing_terminal_tool_and_suffix_peer_bucket_excludes_focus_path",
+            "familyDistinctPathCount": 2,
+            "familyId": "terminal:shadow_inspect_file:suffix_tail:shadow_inspect_file:len:2:golden_path",
+            "familyLabel": "other routes into shadow_inspect_file",
+            "peerObservationCount": 6,
+            "suffixBucketObservationCount": 12,
+            "windowLength": 2
+          }
+        }
+      ],
+      "recommendation": "Focus on the highest-lift failure endpoint first. Tighten the handoff into that terminal tool or add a safer bridge before the failing step.",
+      "severity": "warning",
+      "status": "ready",
+      "summary": "1 targeted failure path and 1 reusable success path crossed the emission threshold.",
+      "title": "Sequence risk map (2)",
+      "uncertainty": {
+        "allowedClaims": [
+          "risky_sequences",
+          "golden_paths"
+        ],
+        "blockedBy": [],
+        "claimScope": "full",
+        "claimScopeLabel": "full claim",
+        "explanation": "The dataset supported the full claim, and the observed pattern cleared the emission threshold.",
+        "headline": "Credible finding",
+        "label": "Credible finding",
+        "level": "credible",
+        "rationale": "Dataset supports comparing sequence outcomes against baseline behavior.",
+        "supportStatus": "eligible"
+      }
+    },
+    {
+      "blockedBy": [],
+      "evidence": {
+        "comparableClients": [
+          "claude-desktop",
+          "cursor"
+        ]
+      },
+      "id": "client_divergence",
+      "items": [
+        {
+          "avgToolsPerSession": 2,
+          "baselineSuccessRate": 1,
+          "baselineToolsPerSession": 2.5,
+          "clientHint": "cursor",
+          "eventCount": 12,
+          "issueType": "client_outlier",
+          "sessionCount": 6,
+          "successGap": 0.5,
+          "successRate": 0.5,
+          "toolsGap": 0.5
+        },
+        {
+          "baselineToolErrorRate": 0,
+          "clientErrorRate": 1,
+          "clientHint": "cursor",
+          "errorGap": 1,
+          "issueType": "tool_outlier",
+          "observationCount": 6,
+          "overallClientOutlier": true,
+          "toolName": "shadow_inspect_file"
+        }
+      ],
+      "recommendation": "Review the worst client-specific path first. Divergence this large usually means descriptions, examples, or affordances are landing differently across clients.",
+      "severity": "warning",
+      "status": "ready",
+      "summary": "2 client-level divergence patterns crossed the emission threshold.",
+      "title": "Client divergence (2)",
+      "uncertainty": {
+        "allowedClaims": [
+          "client_comparisons"
+        ],
+        "blockedBy": [],
+        "claimScope": "full",
+        "claimScopeLabel": "full claim",
+        "explanation": "The dataset supported the full claim, and the observed pattern cleared the emission threshold.",
+        "headline": "Credible finding",
+        "label": "Credible finding",
+        "level": "credible",
+        "rationale": "Dataset can compare tool usage and outcomes across normalized clients.",
+        "supportStatus": "eligible"
+      }
+    },
+    {
+      "blockedBy": [],
+      "evidence": {
+        "supportMode": "eligible",
+        "toolsObserved": 6
+      },
+      "id": "argument_mismatch_patterns",
+      "items": [
+        {
+          "argumentName": "filePath",
+          "expected": "string",
+          "issueType": "wrong_argument_type_or_shape",
+          "mismatchCount": 3,
+          "mismatchRate": 0.33,
+          "observationCount": 9,
+          "observedExample": "array:string",
+          "recommendation": "Models are sending the wrong shape here. Tighten the schema wording or simplify the accepted shape.",
+          "totalToolObservations": 12,
+          "toolName": "shadow_inspect_file"
+        },
+        {
+          "argumentName": "filePath",
+          "issueType": "missing_required_argument",
+          "mismatchCount": 3,
+          "mismatchRate": 0.25,
+          "observationCount": 12,
+          "recommendation": "Clarify this argument in the tool description or make the schema easier for models to satisfy.",
+          "toolName": "shadow_inspect_file"
+        }
+      ],
+      "recommendation": "Improve the descriptions or schemas for the highest-rate mismatches before shipping more tools around them.",
+      "severity": "warning",
+      "status": "ready",
+      "summary": "2 recurring argument mismatch patterns crossed the emission threshold.",
+      "title": "Argument mismatch patterns (2)",
+      "uncertainty": {
+        "allowedClaims": [
+          "missing_required_arguments",
+          "wrong_argument_type_or_shape",
+          "invalid_argument_value"
+        ],
+        "blockedBy": [],
+        "claimScope": "full",
+        "claimScopeLabel": "full claim",
+        "explanation": "The dataset supported the full claim, and the observed pattern cleared the emission threshold.",
+        "headline": "Credible finding",
+        "label": "Credible finding",
+        "level": "credible",
+        "rationale": "Dataset can compare expected schema against observed arguments with enough fidelity for typed mismatch claims.",
+        "supportStatus": "eligible"
+      }
+    },
+    {
+      "blockedBy": [],
+      "evidence": {
+        "medianSessionLength": 2,
+        "sessionCount": 18,
+        "topTerminationTool": "shadow_inspect_file"
+      },
+      "id": "session_termination_analysis",
+      "items": [
+        {
+          "classification": "likely_natural_exit",
+          "medianSessionLengthAtTermination": 2.5,
+          "sessionsEndingHere": 12,
+          "sessionsReachingTool": 12,
+          "terminationRate": 1,
+          "toolName": "shadow_inspect_file"
+        },
+        {
+          "classification": "likely_natural_exit",
+          "medianSessionLengthAtTermination": 2,
+          "sessionsEndingHere": 6,
+          "sessionsReachingTool": 12,
+          "terminationRate": 0.5,
+          "toolName": "shadow_search_concept"
+        }
+      ],
+      "recommendation": "Double-check whether these session endings are intentional completions or a sign the tool is acting like a stopping point.",
+      "severity": "warning",
+      "status": "ready",
+      "summary": "shadow_inspect_file was the most common termination tool, and 0 candidate dead-end patterns crossed the emission threshold.",
+      "title": "Session termination analysis (2)",
+      "uncertainty": {
+        "allowedClaims": [
+          "session_dead_ends"
+        ],
+        "blockedBy": [],
+        "claimScope": "full",
+        "claimScopeLabel": "full claim",
+        "explanation": "The dataset supported the full claim, and the observed pattern cleared the emission threshold.",
+        "headline": "Credible finding",
+        "label": "Credible finding",
+        "level": "credible",
+        "rationale": "Dataset supports identifying where sessions end and which tools correlate with dead ends.",
+        "supportStatus": "eligible"
+      }
+    }
+  ],
+  "generatedAt": "2026-05-29T07:40:46.834Z",
+  "reportVersion": "1.0",
+  "sourceKey": "logfile:liquid-shadow-dogfood",
+  "summary": {
+    "clearFindingCount": 0,
+    "eventCount": 42,
+    "readyFindingCount": 6,
+    "sessionCount": 18,
+    "suppressedFindingCount": 0,
+    "toolCatalogSize": 6
+  },
+  "suppressedFindings": []
+}

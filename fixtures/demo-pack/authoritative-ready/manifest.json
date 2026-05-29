@@ -1,0 +1,105 @@
+{
+  "actorPrivacy": "hashed",
+  "artifacts": {
+    "catalog": "tool-catalog.json",
+    "events": "events.ndjson",
+    "expectedJson": "expected-report.json",
+    "expectedMarkdown": "expected-report.md",
+    "expectedTerminal": "expected-report.txt",
+    "manifest": "manifest.json",
+    "readme": "README.md"
+  },
+  "commands": {
+    "analyzeJson": "npx pathloom analyze --source logfile:demo-pack --json",
+    "analyzeMarkdown": "npx pathloom analyze --source logfile:demo-pack --markdown",
+    "analyzeTerminal": "npx pathloom analyze --source logfile:demo-pack",
+    "import": "npx pathloom import --format logfile --input ./fixtures/demo-pack/authoritative-ready/events.ndjson --catalog ./fixtures/demo-pack/authoritative-ready/tool-catalog.json --source logfile:demo-pack --actor-privacy hashed",
+    "rebuild": "npm run demo-pack:build"
+  },
+  "dataset": {
+    "catalogToolCount": 6,
+    "eventCount": 49,
+    "readiness": "full",
+    "sessionCount": 29,
+    "sourceKind": "logfile",
+    "toolCatalogAuthority": "external_catalog"
+  },
+  "description": "Canonical importable Pathloom demo pack with enough realistic sessions, client divergence, argument mismatches, sequence behavior, and actor linkage to exercise the full credibility-first report surface.",
+  "expectedFindings": [
+    {
+      "id": "activation_tool_report",
+      "keyItems": [
+        "query"
+      ],
+      "severity": "warning",
+      "status": "ready",
+      "summary": "query correlated with 83% second-session return in the linked cohort at 14.17x the return rate of the rest of the cohort.",
+      "title": "Activation tool report"
+    },
+    {
+      "id": "sequence_risk_map",
+      "keyItems": [
+        "search -> create",
+        "search -> list",
+        "query -> list",
+        "list -> create"
+      ],
+      "severity": "warning",
+      "status": "ready",
+      "summary": "2 targeted failure paths and 2 reusable success paths crossed the emission threshold.",
+      "title": "Sequence risk map (4)"
+    },
+    {
+      "id": "dead_tool_detection",
+      "keyItems": [
+        "bulk_export",
+        "delete_record"
+      ],
+      "severity": "warning",
+      "status": "ready",
+      "summary": "2 registered tools had zero calls across 29 sessions.",
+      "title": "Dead tools (2)"
+    },
+    {
+      "id": "client_divergence",
+      "keyItems": [
+        "cursor",
+        "cursor.create"
+      ],
+      "severity": "warning",
+      "status": "ready",
+      "summary": "2 client-level divergence patterns crossed the emission threshold.",
+      "title": "Client divergence (2)"
+    },
+    {
+      "id": "argument_mismatch_patterns",
+      "keyItems": [
+        "create.userId",
+        "search.limit"
+      ],
+      "severity": "warning",
+      "status": "ready",
+      "summary": "2 recurring argument mismatch patterns crossed the emission threshold.",
+      "title": "Argument mismatch patterns (2)"
+    },
+    {
+      "id": "session_termination_analysis",
+      "keyItems": [
+        "create",
+        "list"
+      ],
+      "severity": "warning",
+      "status": "ready",
+      "summary": "list was the most common termination tool, and 2 candidate dead-end patterns crossed the emission threshold.",
+      "title": "Session termination analysis (2)"
+    }
+  ],
+  "generatedFrom": {
+    "fixtureModule": "fixtures/credibilityFixtures.js",
+    "scenarioName": "authoritative_ready"
+  },
+  "id": "authoritative-ready",
+  "packVersion": "1.0",
+  "sourceKey": "logfile:demo-pack",
+  "title": "Authoritative Ready Demo Pack"
+}

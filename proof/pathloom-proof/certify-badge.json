@@ -1,0 +1,109 @@
+{
+  "badgeVersion": "1.0",
+  "kind": "pathloom_certify",
+  "issuedAt": "2026-05-27T19:24:54.904Z",
+  "pathloomVersion": "1.0.0",
+  "passed": true,
+  "demoPack": {
+    "id": "authoritative-ready",
+    "sourceKey": "logfile:demo-pack",
+    "contentHash": "0efe3a9ae36b93bf5711748ae4c0d3b1a53723719a122b66d59d85c8539bae0a",
+    "hashAlgorithm": "sha256",
+    "hashedFiles": [
+      "events.ndjson",
+      "tool-catalog.json",
+      "expected-report.json"
+    ]
+  },
+  "gates": {
+    "calibrationScenarios": [
+      "sparse_launch_week",
+      "degraded_presence_only",
+      "activation_candidate_guardrail",
+      "sequence_terminal_tool_trap",
+      "sequence_trajectory_honesty",
+      "sequence_thin_volume_deep_gate",
+      "activation_observational_honesty"
+    ],
+    "goldenScenarios": [
+      "authoritative_ready",
+      "demo-pack"
+    ],
+    "gateCount": 9,
+    "passedGateCount": 9,
+    "results": [
+      {
+        "gate": "calibration",
+        "scenario": "sparse_launch_week",
+        "passed": true,
+        "totalPressure": 0,
+        "maxPressure": 0,
+        "violationCount": 0
+      },
+      {
+        "gate": "calibration",
+        "scenario": "degraded_presence_only",
+        "passed": true,
+        "totalPressure": 0,
+        "maxPressure": 0,
+        "violationCount": 0
+      },
+      {
+        "gate": "calibration",
+        "scenario": "activation_candidate_guardrail",
+        "passed": true,
+        "totalPressure": 0,
+        "maxPressure": 0,
+        "violationCount": 0
+      },
+      {
+        "gate": "calibration",
+        "scenario": "sequence_terminal_tool_trap",
+        "passed": true,
+        "totalPressure": 0,
+        "maxPressure": 0,
+        "violationCount": 0
+      },
+      {
+        "gate": "calibration",
+        "scenario": "sequence_trajectory_honesty",
+        "passed": true,
+        "totalPressure": 0,
+        "maxPressure": 0,
+        "violationCount": 0
+      },
+      {
+        "gate": "calibration",
+        "scenario": "sequence_thin_volume_deep_gate",
+        "passed": true,
+        "totalPressure": 0,
+        "maxPressure": 0,
+        "violationCount": 0
+      },
+      {
+        "gate": "calibration",
+        "scenario": "activation_observational_honesty",
+        "passed": true,
+        "totalPressure": 0,
+        "maxPressure": 0,
+        "violationCount": 0
+      },
+      {
+        "gate": "golden",
+        "scenario": "authoritative_ready",
+        "passed": true,
+        "mismatchCount": 0
+      },
+      {
+        "gate": "golden",
+        "scenario": "demo-pack",
+        "passed": true,
+        "mismatchCount": 0
+      }
+    ]
+  },
+  "verify": {
+    "command": "npx pathloom check --emit-badge",
+    "note": "Re-run on the same demo-pack commit; contentHash must match for the badge to be comparable."
+  }
+}

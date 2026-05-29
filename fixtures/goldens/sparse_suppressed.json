@@ -1,0 +1,212 @@
+{
+  "dataset": {
+    "actorIdentityMode": "stable_actor",
+    "readiness": "full",
+    "sourceKind": "wrapper",
+    "sourceKey": "wrapper:sparse",
+    "telemetrySpine": {
+      "sessionization": "explicit_session_id",
+      "firstClassFields": [],
+      "importedMetadata": {
+        "aiModelIdentity": "none",
+        "aiPromptIdentity": "none",
+        "externalAttributeBags": "none",
+        "langfuseSurfaces": "none"
+      },
+      "spanLineage": "none",
+      "traceIdentity": "none"
+    },
+    "toolCatalogAuthority": "runtime_registration"
+  },
+  "findings": [
+    {
+      "blockedBy": [],
+      "evidence": {
+        "supportMode": "eligible",
+        "toolsObserved": 6
+      },
+      "id": "argument_mismatch_patterns",
+      "items": [],
+      "recommendation": null,
+      "severity": "clear",
+      "status": "clear",
+      "summary": "No recurring argument confusion patterns crossed the emission threshold.",
+      "title": "Argument mismatch patterns",
+      "uncertainty": {
+        "allowedClaims": [
+          "missing_required_arguments",
+          "wrong_argument_type_or_shape",
+          "invalid_argument_value"
+        ],
+        "blockedBy": [],
+        "claimScope": "full",
+        "claimScopeLabel": "full claim",
+        "explanation": "The dataset could evaluate this claim, but no pattern crossed the emission threshold strongly enough to emit a product finding.",
+        "headline": "Weak signal",
+        "label": "Weak signal",
+        "level": "weak",
+        "rationale": "Dataset can compare expected schema against observed arguments with enough fidelity for typed mismatch claims.",
+        "supportStatus": "eligible"
+      }
+    }
+  ],
+  "generatedAt": "<generated-at>",
+  "reportVersion": "1.0",
+  "sourceKey": "wrapper:sparse",
+  "summary": {
+    "clearFindingCount": 1,
+    "eventCount": 2,
+    "readyFindingCount": 0,
+    "sessionCount": 2,
+    "suppressedFindingCount": 5,
+    "toolCatalogSize": 6
+  },
+  "suppressedFindings": [
+    {
+      "blockedBy": [
+        "insufficient_session_count"
+      ],
+      "evidence": {},
+      "id": "dead_tool_detection",
+      "items": [],
+      "recommendation": null,
+      "severity": "info",
+      "status": "suppressed",
+      "summary": "Dead-tool findings stay quiet until the dataset has enough sessions to avoid day-one false positives.",
+      "title": "Dead tools",
+      "uncertainty": {
+        "allowedClaims": [
+          "unused_registered_tools"
+        ],
+        "blockedBy": [
+          "insufficient_session_count"
+        ],
+        "claimScope": "full",
+        "claimScopeLabel": "full claim",
+        "explanation": "The dataset does not support this claim. Dataset can support unused-tool claims because the registered tool inventory is authoritative. Blocked by: insufficient_session_count.",
+        "headline": "Unsupported signal",
+        "label": "Unsupported",
+        "level": "unsupported",
+        "rationale": "Dataset can support unused-tool claims because the registered tool inventory is authoritative.",
+        "supportStatus": "eligible"
+      }
+    },
+    {
+      "blockedBy": [
+        "insufficient_session_count"
+      ],
+      "evidence": {},
+      "id": "session_termination_analysis",
+      "items": [],
+      "recommendation": null,
+      "severity": "info",
+      "status": "suppressed",
+      "summary": "Termination analysis stays quiet until enough sessions exist to distinguish dead ends from noise.",
+      "title": "Session termination analysis",
+      "uncertainty": {
+        "allowedClaims": [
+          "session_dead_ends"
+        ],
+        "blockedBy": [
+          "insufficient_session_count"
+        ],
+        "claimScope": "full",
+        "claimScopeLabel": "full claim",
+        "explanation": "The dataset does not support this claim. Dataset supports identifying where sessions end and which tools correlate with dead ends. Blocked by: insufficient_session_count.",
+        "headline": "Unsupported signal",
+        "label": "Unsupported",
+        "level": "unsupported",
+        "rationale": "Dataset supports identifying where sessions end and which tools correlate with dead ends.",
+        "supportStatus": "eligible"
+      }
+    },
+    {
+      "blockedBy": [
+        "insufficient_sequence_observations"
+      ],
+      "evidence": {},
+      "id": "sequence_risk_map",
+      "items": [],
+      "recommendation": null,
+      "severity": "info",
+      "status": "suppressed",
+      "summary": "Sequence findings stay quiet until Pathloom has enough repeated ordered paths to compare against baseline behavior.",
+      "title": "Sequence risk map",
+      "uncertainty": {
+        "allowedClaims": [
+          "risky_sequences",
+          "golden_paths"
+        ],
+        "blockedBy": [
+          "insufficient_sequence_observations"
+        ],
+        "claimScope": "full",
+        "claimScopeLabel": "full claim",
+        "explanation": "The dataset does not support this claim. Dataset supports comparing sequence outcomes against baseline behavior. Blocked by: insufficient_sequence_observations.",
+        "headline": "Unsupported signal",
+        "label": "Unsupported",
+        "level": "unsupported",
+        "rationale": "Dataset supports comparing sequence outcomes against baseline behavior.",
+        "supportStatus": "eligible"
+      }
+    },
+    {
+      "blockedBy": [
+        "insufficient_client_variety"
+      ],
+      "evidence": {},
+      "id": "client_divergence",
+      "items": [],
+      "recommendation": null,
+      "severity": "info",
+      "status": "suppressed",
+      "summary": "Client divergence needs at least two meaningfully represented clients before differences can be trusted.",
+      "title": "Client divergence",
+      "uncertainty": {
+        "allowedClaims": [
+          "client_comparisons"
+        ],
+        "blockedBy": [
+          "insufficient_client_variety"
+        ],
+        "claimScope": "full",
+        "claimScopeLabel": "full claim",
+        "explanation": "The dataset does not support this claim. Dataset can compare tool usage and outcomes across normalized clients. Blocked by: insufficient_client_variety.",
+        "headline": "Unsupported signal",
+        "label": "Unsupported",
+        "level": "unsupported",
+        "rationale": "Dataset can compare tool usage and outcomes across normalized clients.",
+        "supportStatus": "eligible"
+      }
+    },
+    {
+      "blockedBy": [
+        "missing_observed_actor_linkage"
+      ],
+      "evidence": {},
+      "id": "activation_tool_report",
+      "items": [],
+      "recommendation": null,
+      "severity": "info",
+      "status": "suppressed",
+      "summary": "Activation findings stay quiet until privacy-safe actor linkage is actually present in the observed event stream, not just declared in the dataset profile.",
+      "title": "Activation tool report",
+      "uncertainty": {
+        "allowedClaims": [
+          "activation_correlations"
+        ],
+        "blockedBy": [
+          "missing_observed_actor_linkage"
+        ],
+        "claimScope": "full",
+        "claimScopeLabel": "full claim",
+        "explanation": "The dataset does not support this claim. Dataset supports privacy-safe return-cohort analysis for activation-style findings. Blocked by: missing_observed_actor_linkage.",
+        "headline": "Unsupported signal",
+        "label": "Unsupported",
+        "level": "unsupported",
+        "rationale": "Dataset supports privacy-safe return-cohort analysis for activation-style findings.",
+        "supportStatus": "eligible"
+      }
+    }
+  ]
+}

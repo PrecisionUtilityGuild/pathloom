@@ -1,0 +1,24 @@
+Pathloom analysis for wrapper:sparse
+Sessions: 2  Events: 2  Catalog tools: 6
+Telemetry: sessions explicit_session_id; trace none; span lineage none; first-class fields none
+
+OK  Argument mismatch patterns
+   evidence: weak signal (full claim)
+   why: The dataset could evaluate this claim, but no pattern crossed the emission threshold strongly enough to emit a product finding.
+
+INFO  Suppressed findings
+   Dead tools -- Dead-tool findings stay quiet until the dataset has enough sessions to avoid day-one false positives.
+      evidence: unsupported (full claim)
+      why: The dataset does not support this claim. Dataset can support unused-tool claims because the registered tool inventory is authoritative. Blocked by: insufficient_session_count.
+   Session termination analysis -- Termination analysis stays quiet until enough sessions exist to distinguish dead ends from noise.
+      evidence: unsupported (full claim)
+      why: The dataset does not support this claim. Dataset supports identifying where sessions end and which tools correlate with dead ends. Blocked by: insufficient_session_count.
+   Sequence risk map -- Sequence findings stay quiet until Pathloom has enough repeated ordered paths to compare against baseline behavior.
+      evidence: unsupported (full claim)
+      why: The dataset does not support this claim. Dataset supports comparing sequence outcomes against baseline behavior. Blocked by: insufficient_sequence_observations.
+   Client divergence -- Client divergence needs at least two meaningfully represented clients before differences can be trusted.
+      evidence: unsupported (full claim)
+      why: The dataset does not support this claim. Dataset can compare tool usage and outcomes across normalized clients. Blocked by: insufficient_client_variety.
+   Activation tool report -- Activation findings stay quiet until privacy-safe actor linkage is actually present in the observed event stream, not just declared in the dataset profile.
+      evidence: unsupported (full claim)
+      why: The dataset does not support this claim. Dataset supports privacy-safe return-cohort analysis for activation-style findings. Blocked by: missing_observed_actor_linkage.

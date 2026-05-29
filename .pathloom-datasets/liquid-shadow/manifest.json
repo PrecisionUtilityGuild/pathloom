@@ -1,0 +1,132 @@
+{
+  "generatedAt": "2026-05-29T07:40:46.892Z",
+  "workflow": {
+    "entrypoint": "npm run dogfood:liquid-shadow",
+    "label": "liquid-shadow-dogfood",
+    "sourceKey": "logfile:liquid-shadow-dogfood",
+    "targetRepo": "/Users/a14a/Documents/liveprojects/ts-repo-prep"
+  },
+  "server": {
+    "id": "liquid-shadow-mcp",
+    "version": "1.0.12"
+  },
+  "dataset": {
+    "capturedCalls": 42,
+    "invocationEvents": 42,
+    "sessions": 18,
+    "toolCatalogCount": 6
+  },
+  "importSummary": {
+    "databasePath": "/Users/a14a/Documents/pathloom/.pathloom-datasets/liquid-shadow/pathloom.db",
+    "eligibleFindings": [
+      "dead_tool_detection",
+      "argument_mismatch_patterns",
+      "session_termination_analysis",
+      "sequence_risk_map",
+      "client_divergence",
+      "activation_tool_report"
+    ],
+    "eventCount": 42,
+    "narrowedFindings": [],
+    "readiness": "full",
+    "sourceKey": "logfile:liquid-shadow-dogfood",
+    "sourceKind": "logfile",
+    "suppressedFindings": [],
+    "telemetrySpine": {
+      "sessionization": "explicit_session_id",
+      "firstClassFields": [],
+      "importedMetadata": {
+        "aiModelIdentity": "none",
+        "aiPromptIdentity": "none",
+        "externalAttributeBags": "none",
+        "langfuseSurfaces": "none"
+      },
+      "spanLineage": "none",
+      "traceIdentity": "none"
+    },
+    "toolCatalogSize": 6
+  },
+  "snapshot": {
+    "bundleManifestPath": "/Users/a14a/Documents/pathloom/.pathloom-datasets/liquid-shadow/snapshots/logfile-liquid-shadow-dogfood-20260529T074046834Z/bundle.json",
+    "key": "logfile:liquid-shadow-dogfood@20260529T074046834Z",
+    "summaryPath": "/Users/a14a/Documents/pathloom/.pathloom-datasets/liquid-shadow/snapshot-summary.txt"
+  },
+  "commands": {
+    "rerunDogfood": "npm run dogfood:liquid-shadow",
+    "analyzeTerminal": "npx pathloom analyze --db /Users/a14a/Documents/pathloom/.pathloom-datasets/liquid-shadow/pathloom.db --source logfile:liquid-shadow-dogfood",
+    "analyzeMarkdown": "npx pathloom analyze --db /Users/a14a/Documents/pathloom/.pathloom-datasets/liquid-shadow/pathloom.db --source logfile:liquid-shadow-dogfood --markdown",
+    "analyzeJson": "npx pathloom analyze --db /Users/a14a/Documents/pathloom/.pathloom-datasets/liquid-shadow/pathloom.db --source logfile:liquid-shadow-dogfood --json",
+    "bundle": "npx pathloom bundle --db /Users/a14a/Documents/pathloom/.pathloom-datasets/liquid-shadow/pathloom.db --source logfile:liquid-shadow-dogfood --output /Users/a14a/Documents/pathloom/.pathloom-datasets/liquid-shadow/bundle",
+    "snapshot": "npx pathloom snapshot --db /Users/a14a/Documents/pathloom/.pathloom-datasets/liquid-shadow/pathloom.db --source logfile:liquid-shadow-dogfood --label liquid-shadow-dogfood --output /Users/a14a/Documents/pathloom/.pathloom-datasets/liquid-shadow/snapshots",
+    "feedback": "npx pathloom feedback --db /Users/a14a/Documents/pathloom/.pathloom-datasets/liquid-shadow/pathloom.db --source logfile:liquid-shadow-dogfood --markdown",
+    "diffLatest": "npx pathloom diff --db /Users/a14a/Documents/pathloom/.pathloom-datasets/liquid-shadow/pathloom.db --source logfile:liquid-shadow-dogfood --markdown"
+  },
+  "artifacts": [
+    {
+      "id": "events_ndjson",
+      "path": "/Users/a14a/Documents/pathloom/.pathloom-datasets/liquid-shadow/liquid-shadow-dogfood.ndjson",
+      "purpose": "Captured liquid-shadow invocation telemetry in Pathloom logfile format."
+    },
+    {
+      "id": "tool_catalog",
+      "path": "/Users/a14a/Documents/pathloom/.pathloom-datasets/liquid-shadow/liquid-shadow-tool-catalog.json",
+      "purpose": "Authoritative tool catalog materialized from liquid-shadow schemas."
+    },
+    {
+      "id": "sqlite_store",
+      "path": "/Users/a14a/Documents/pathloom/.pathloom-datasets/liquid-shadow/pathloom.db",
+      "purpose": "Local Pathloom store used by import, analysis, snapshots, and feedback."
+    },
+    {
+      "id": "import_summary",
+      "path": "/Users/a14a/Documents/pathloom/.pathloom-datasets/liquid-shadow/import-summary.json",
+      "purpose": "Readiness and ingestion summary returned by the public import command."
+    },
+    {
+      "id": "terminal_report",
+      "path": "/Users/a14a/Documents/pathloom/.pathloom-datasets/liquid-shadow/report.txt",
+      "purpose": "Action-first terminal rendering from the public analyze command."
+    },
+    {
+      "id": "markdown_report",
+      "path": "/Users/a14a/Documents/pathloom/.pathloom-datasets/liquid-shadow/report.md",
+      "purpose": "Shareable Markdown report from the public analyze command."
+    },
+    {
+      "id": "json_report",
+      "path": "/Users/a14a/Documents/pathloom/.pathloom-datasets/liquid-shadow/report.json",
+      "purpose": "Stable machine-readable report from the public analyze command."
+    },
+    {
+      "id": "bundle_dir",
+      "path": "/Users/a14a/Documents/pathloom/.pathloom-datasets/liquid-shadow/bundle",
+      "purpose": "Distribution bundle containing share summary, Markdown, JSON, and manifest."
+    },
+    {
+      "id": "feedback_markdown",
+      "path": "/Users/a14a/Documents/pathloom/.pathloom-datasets/liquid-shadow/feedback.md",
+      "purpose": "Snapshot-backed review targets and adjudications rendered in Markdown."
+    },
+    {
+      "id": "snapshot_dir",
+      "path": "/Users/a14a/Documents/pathloom/.pathloom-datasets/liquid-shadow/snapshots",
+      "purpose": "Saved report snapshots and per-snapshot bundle outputs for later diffs."
+    },
+    {
+      "id": "bundle_summary",
+      "path": "/Users/a14a/Documents/pathloom/.pathloom-datasets/liquid-shadow/bundle-summary.txt",
+      "purpose": "Terminal summary returned by the bundle command."
+    },
+    {
+      "id": "snapshot_summary",
+      "path": "/Users/a14a/Documents/pathloom/.pathloom-datasets/liquid-shadow/snapshot-summary.txt",
+      "purpose": "Terminal summary returned by the snapshot command, including the stored snapshot key."
+    },
+    {
+      "id": "manifest",
+      "path": "/Users/a14a/Documents/pathloom/.pathloom-datasets/liquid-shadow/manifest.json",
+      "purpose": "Canonical map of commands, paths, and review surfaces for this dogfood run."
+    }
+  ],
+  "bundleSummary": "Pathloom bundle written to /Users/a14a/Documents/pathloom/.pathloom-datasets/liquid-shadow/bundle\n6 ready findings, 0 clear findings, 0 suppressed findings, for logfile:liquid-shadow-dogfood across 18 sessions.\n\nShare summary: /Users/a14a/Documents/pathloom/.pathloom-datasets/liquid-shadow/bundle/share-summary.md\nMarkdown report: /Users/a14a/Documents/pathloom/.pathloom-datasets/liquid-shadow/bundle/report.md\nJSON report: /Users/a14a/Documents/pathloom/.pathloom-datasets/liquid-shadow/bundle/report.json\nBundle manifest: /Users/a14a/Documents/pathloom/.pathloom-datasets/liquid-shadow/bundle/bundle.json"
+}

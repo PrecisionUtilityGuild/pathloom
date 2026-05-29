@@ -1,0 +1,227 @@
+{
+  "dataset": {
+    "actorIdentityMode": "session_only",
+    "readiness": "partial",
+    "sourceKind": "logfile",
+    "sourceKey": "logfile:demo",
+    "telemetrySpine": {
+      "sessionization": "explicit_session_id",
+      "firstClassFields": [],
+      "importedMetadata": {
+        "aiModelIdentity": "none",
+        "aiPromptIdentity": "none",
+        "externalAttributeBags": "none",
+        "langfuseSurfaces": "none"
+      },
+      "spanLineage": "none",
+      "traceIdentity": "none"
+    },
+    "toolCatalogAuthority": "none"
+  },
+  "findings": [
+    {
+      "blockedBy": [],
+      "evidence": {
+        "supportMode": "narrowed",
+        "toolsObserved": 1
+      },
+      "id": "argument_mismatch_patterns",
+      "items": [
+        {
+          "argumentName": "userId",
+          "issueType": "missing_required_argument",
+          "mismatchCount": 2,
+          "mismatchRate": 0.67,
+          "observationCount": 3,
+          "recommendation": "Clarify this argument in the tool description or make the schema easier for models to satisfy.",
+          "toolName": "create"
+        }
+      ],
+      "recommendation": "Improve the descriptions or schemas for the highest-rate mismatches before shipping more tools around them.",
+      "severity": "warning",
+      "status": "ready",
+      "summary": "1 recurring missing-argument pattern crossed the emission threshold.",
+      "title": "Argument mismatch patterns (1)",
+      "uncertainty": {
+        "allowedClaims": [
+          "missing_required_arguments"
+        ],
+        "blockedBy": [],
+        "claimScope": "narrowed",
+        "claimScopeLabel": "narrowed claim",
+        "explanation": "The dataset only supported a safer subset of the full claim, and the observed pattern cleared the emission threshold within that narrower scope.",
+        "headline": "Credible finding on a narrowed claim",
+        "label": "Credible finding",
+        "level": "credible",
+        "rationale": "Presence-only arguments support missing-required-argument claims, but not type or value assertions.",
+        "supportStatus": "narrowed"
+      }
+    },
+    {
+      "blockedBy": [],
+      "evidence": {
+        "medianSessionLength": 1,
+        "sessionCount": 4,
+        "topTerminationTool": "create"
+      },
+      "id": "session_termination_analysis",
+      "items": [
+        {
+          "classification": "possible_dead_end",
+          "medianSessionLengthAtTermination": 1,
+          "sessionsEndingHere": 3,
+          "sessionsReachingTool": 3,
+          "terminationRate": 1,
+          "toolName": "create"
+        }
+      ],
+      "recommendation": "Shorten the path into a successful next action after this tool, or make the expected follow-up clearer.",
+      "severity": "warning",
+      "status": "ready",
+      "summary": "create was the most common termination tool, and 1 candidate dead-end pattern crossed the emission threshold.",
+      "title": "Session termination analysis (1)",
+      "uncertainty": {
+        "allowedClaims": [
+          "session_dead_ends"
+        ],
+        "blockedBy": [],
+        "claimScope": "full",
+        "claimScopeLabel": "full claim",
+        "explanation": "The dataset supported the full claim, and the observed pattern cleared the emission threshold.",
+        "headline": "Credible finding",
+        "label": "Credible finding",
+        "level": "credible",
+        "rationale": "Dataset supports identifying where sessions end and which tools correlate with dead ends.",
+        "supportStatus": "eligible"
+      }
+    }
+  ],
+  "generatedAt": "<generated-at>",
+  "reportVersion": "1.0",
+  "sourceKey": "logfile:demo",
+  "summary": {
+    "clearFindingCount": 0,
+    "eventCount": 4,
+    "readyFindingCount": 2,
+    "sessionCount": 4,
+    "suppressedFindingCount": 4,
+    "toolCatalogSize": 1
+  },
+  "suppressedFindings": [
+    {
+      "blockedBy": [
+        "missing_tool_catalog_authority",
+        "non_authoritative_tool_catalog"
+      ],
+      "evidence": {},
+      "id": "dead_tool_detection",
+      "items": [],
+      "recommendation": null,
+      "severity": "info",
+      "status": "suppressed",
+      "summary": "Dead-tool findings require an authoritative tool catalog. Observed call absence alone is never enough.",
+      "title": "Dead tools",
+      "uncertainty": {
+        "allowedClaims": [],
+        "blockedBy": [
+          "missing_tool_catalog_authority",
+          "non_authoritative_tool_catalog"
+        ],
+        "claimScope": "suppressed",
+        "claimScopeLabel": "suppressed claim",
+        "explanation": "The dataset does not support this claim. Dead-tool findings require an authoritative tool catalog. Observed call absence alone is never enough. Blocked by: missing_tool_catalog_authority, non_authoritative_tool_catalog.",
+        "headline": "Unsupported claim",
+        "label": "Unsupported",
+        "level": "unsupported",
+        "rationale": "Dead-tool findings require an authoritative tool catalog. Observed call absence alone is never enough.",
+        "supportStatus": "suppressed"
+      }
+    },
+    {
+      "blockedBy": [
+        "insufficient_sequence_observations"
+      ],
+      "evidence": {},
+      "id": "sequence_risk_map",
+      "items": [],
+      "recommendation": null,
+      "severity": "info",
+      "status": "suppressed",
+      "summary": "Sequence findings stay quiet until Pathloom has enough repeated ordered paths to compare against baseline behavior.",
+      "title": "Sequence risk map",
+      "uncertainty": {
+        "allowedClaims": [
+          "risky_sequences",
+          "golden_paths"
+        ],
+        "blockedBy": [
+          "insufficient_sequence_observations"
+        ],
+        "claimScope": "full",
+        "claimScopeLabel": "full claim",
+        "explanation": "The dataset does not support this claim. Dataset supports comparing sequence outcomes against baseline behavior. Blocked by: insufficient_sequence_observations.",
+        "headline": "Unsupported signal",
+        "label": "Unsupported",
+        "level": "unsupported",
+        "rationale": "Dataset supports comparing sequence outcomes against baseline behavior.",
+        "supportStatus": "eligible"
+      }
+    },
+    {
+      "blockedBy": [
+        "missing_normalized_client_hints"
+      ],
+      "evidence": {},
+      "id": "client_divergence",
+      "items": [],
+      "recommendation": null,
+      "severity": "info",
+      "status": "suppressed",
+      "summary": "Client divergence requires normalized client hints rather than free-form labels.",
+      "title": "Client divergence",
+      "uncertainty": {
+        "allowedClaims": [],
+        "blockedBy": [
+          "missing_normalized_client_hints"
+        ],
+        "claimScope": "suppressed",
+        "claimScopeLabel": "suppressed claim",
+        "explanation": "The dataset does not support this claim. Client divergence requires normalized client hints rather than free-form labels. Blocked by: missing_normalized_client_hints.",
+        "headline": "Unsupported claim",
+        "label": "Unsupported",
+        "level": "unsupported",
+        "rationale": "Client divergence requires normalized client hints rather than free-form labels.",
+        "supportStatus": "suppressed"
+      }
+    },
+    {
+      "blockedBy": [
+        "missing_stable_actor_identity",
+        "non_private_actor_identity"
+      ],
+      "evidence": {},
+      "id": "activation_tool_report",
+      "items": [],
+      "recommendation": null,
+      "severity": "info",
+      "status": "suppressed",
+      "summary": "Activation analysis requires privacy-safe actor linkage across sessions. Session IDs alone are insufficient.",
+      "title": "Activation tool report",
+      "uncertainty": {
+        "allowedClaims": [],
+        "blockedBy": [
+          "missing_stable_actor_identity",
+          "non_private_actor_identity"
+        ],
+        "claimScope": "suppressed",
+        "claimScopeLabel": "suppressed claim",
+        "explanation": "The dataset does not support this claim. Activation analysis requires privacy-safe actor linkage across sessions. Session IDs alone are insufficient. Blocked by: missing_stable_actor_identity, non_private_actor_identity.",
+        "headline": "Unsupported claim",
+        "label": "Unsupported",
+        "level": "unsupported",
+        "rationale": "Activation analysis requires privacy-safe actor linkage across sessions. Session IDs alone are insufficient.",
+        "supportStatus": "suppressed"
+      }
+    }
+  ]
+}

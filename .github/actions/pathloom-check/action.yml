@@ -1,0 +1,44 @@
+name: Pathloom credibility gate
+description: Run pathloom check and upload demo-pack reports (offline-first, no hosted API).
+branding:
+  icon: check-circle
+  color: green
+
+inputs:
+  skip-unit-tests:
+    description: Skip npm test before the credibility gate (not recommended for this repo).
+    required: false
+    default: "false"
+
+runs:
+  using: composite
+  steps:
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: "22"
+        cache: npm
+
+    - name: Install dependencies
+      shell: bash
+      run: npm ci
+
+    - name: Unit tests
+      if: inputs.skip-unit-tests != 'true'
+      shell: bash
+      run: npm test
+
+    - name: Credibility gate
+      shell: bash
+      run: bash scripts/ci-gate.sh
+
+    - name: Upload Pathloom reports
+      if: success()
+      uses: actions/upload-artifact@v4
+      with:
+        name: pathloom-reports
+        path: |
+          .pathloom-ci/report.json
+          .pathloom-ci/report.md
+          .pathloom-ci/check-summary.json
+        if-no-files-found: warn

@@ -1,0 +1,59 @@
+Pathloom analysis for logfile:liquid-shadow-dogfood
+Sessions: 18  Events: 42  Catalog tools: 6
+Telemetry: sessions explicit_session_id; trace none; span lineage none; first-class fields none
+
+WARN  Activation tool report
+   evidence: credible finding (full claim)
+   why: The dataset supported the full claim, and the observed pattern cleared the emission threshold.
+   interpretation: linked-cohort association only; no incremental-effect claim
+   return window: second_observed_session -- Return means the actor had a later observed session. Pathloom also reports immediate (exactly two sessions) vs sustained (three or more) return shapes and median invoked-at gap between first and second sessions when timestamps exist. This is still observational — not incremental lift or causal timing.
+   confounding risk: high -- tool exposure is observational rather than randomized; actors who use a tool may differ from the control cohort before exposure; invoked-at gaps are descriptive timing only, not elapsed-time causal windows
+   actor linkage gate: 12 linked actors met the privacy-safe cohort requirement
+   shadow_ops_context credible cohort signal: 6/6 linked actors returned for a second observed session (100%) -- linked control cohort 0% (no control returns observed) -- 95% interval 61-100% vs control 0-39%
+   cohort: activation:shadow_ops_context:first_session_exposure
+   exposure: 6 actors @ 100% return
+   control: 6 actors @ 0% return
+   return shape: 6 immediate / 0 sustained
+   median invoked-at gap: 1135
+   -> Surface this tool earlier in onboarding and make its value legible, because it is the strongest confidence-backed cohort return signal in this dataset.
+
+WARN  Dead tools (2)
+   evidence: credible finding (full claim)
+   why: The dataset supported the full claim, and the observed pattern cleared the emission threshold.
+   shadow_workspace_gc -- 0 calls across analysis window (confidence: medium)
+   shadow_workspace_status -- 0 calls across analysis window (confidence: medium)
+   -> Remove these tools, rename them, or improve their descriptions before adding more surface area.
+
+WARN  Sequence risk map (2)
+   evidence: credible finding (full claim)
+   why: The dataset supported the full claim, and the observed pattern cleared the emission threshold.
+   shadow_search_path -> shadow_inspect_file -> shadow_inspect_file failure endpoint: 100% errors across 6 paths -- other routes into shadow_inspect_file 0%, terminal-tool peers 0%, seen in cursor only
+   trajectory: terminal:shadow_inspect_file:suffix_tail:shadow_inspect_file:len:2:risky_sequence
+   window: 2-hop; peer bucket obs: 12; distinct paths in bucket: 2
+   cohort semantics: ordered paths sharing terminal tool and suffix peer bucket excludes focus path
+   shadow_search_concept -> shadow_inspect_file -> reusable shadow_inspect_file success path: 100% success across 6 paths -- other routes into shadow_inspect_file 0%, terminal-tool peers 0%, seen in claude-desktop only
+   trajectory: terminal:shadow_inspect_file:suffix_tail:shadow_inspect_file:len:2:golden_path
+   window: 2-hop; peer bucket obs: 12; distinct paths in bucket: 2
+   cohort semantics: ordered paths sharing terminal tool and suffix peer bucket excludes focus path
+   -> Focus on the highest-lift failure endpoint first. Tighten the handoff into that terminal tool or add a safer bridge before the failing step.
+
+WARN  Client divergence (2)
+   evidence: credible finding (full claim)
+   why: The dataset supported the full claim, and the observed pattern cleared the emission threshold.
+   cursor averages 2 tools/session at 50% success -- peer baseline 100%
+   cursor.shadow_inspect_file errors 100% of calls -- peer baseline 0%
+   -> Review the worst client-specific path first. Divergence this large usually means descriptions, examples, or affordances are landing differently across clients.
+
+WARN  Argument mismatch patterns (2)
+   evidence: credible finding (full claim)
+   why: The dataset supported the full claim, and the observed pattern cleared the emission threshold.
+   shadow_inspect_file.filePath sent as array:string in 33% of 9 provided calls
+   shadow_inspect_file.filePath missing in 25% of 12 calls
+   -> Improve the descriptions or schemas for the highest-rate mismatches before shipping more tools around them.
+
+WARN  Session termination analysis (2)
+   evidence: credible finding (full claim)
+   why: The dataset supported the full claim, and the observed pattern cleared the emission threshold.
+   shadow_inspect_file ends 12/12 reached sessions (100%) -- likely_natural_exit
+   shadow_search_concept ends 6/12 reached sessions (50%) -- likely_natural_exit
+   -> Double-check whether these session endings are intentional completions or a sign the tool is acting like a stopping point.

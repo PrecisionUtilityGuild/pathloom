@@ -1,0 +1,67 @@
+Pathloom analysis for wrapper:demo
+Sessions: 29  Events: 49  Catalog tools: 6
+Telemetry: sessions explicit_session_id; trace none; span lineage none; first-class fields none
+
+WARN  Activation tool report
+   evidence: credible finding (full claim)
+   why: The dataset supported the full claim, and the observed pattern cleared the emission threshold.
+   interpretation: linked-cohort association only; no incremental-effect claim
+   return window: second_observed_session -- Return means the actor had a later observed session. Pathloom also reports immediate (exactly two sessions) vs sustained (three or more) return shapes and median invoked-at gap between first and second sessions when timestamps exist. This is still observational — not incremental lift or causal timing.
+   confounding risk: high -- tool exposure is observational rather than randomized; actors who use a tool may differ from the control cohort before exposure; invoked-at gaps are descriptive timing only, not elapsed-time causal windows
+   actor linkage gate: 23 linked actors met the privacy-safe cohort requirement
+   query credible cohort signal: 5/6 linked actors returned for a second observed session (83%) -- linked control cohort 6% (14.17x control return rate) -- 95% interval 44-97% vs control 1-27%
+   cohort: activation:query:first_session_exposure
+   exposure: 6 actors @ 83% return
+   control: 17 actors @ 6% return
+   return shape: 5 immediate / 0 sustained
+   median invoked-at gap: 8
+   -> Surface this tool earlier in onboarding and make its value legible, because it is the strongest confidence-backed cohort return signal in this dataset.
+
+WARN  Sequence risk map (4)
+   evidence: credible finding (full claim)
+   why: The dataset supported the full claim, and the observed pattern cleared the emission threshold.
+   search -> create -> create failure endpoint: 100% errors across 3 paths -- other routes into create 0%, terminal-tool peers 33%, seen in cursor only
+   trajectory: terminal:create:suffix_tail:create:len:2:risky_sequence
+   window: 2-hop; peer bucket obs: 6; distinct paths in bucket: 2
+   cohort semantics: ordered paths sharing terminal tool and suffix peer bucket excludes focus path
+   search -> list -> list failure endpoint: 100% errors across 3 paths -- other routes into list 0%, terminal-tool peers 0%, seen in claude-desktop only
+   trajectory: terminal:list:suffix_tail:list:len:2:risky_sequence
+   window: 2-hop; peer bucket obs: 14; distinct paths in bucket: 2
+   cohort semantics: ordered paths sharing terminal tool and suffix peer bucket excludes focus path
+   query -> list -> reusable list success path: 100% success across 11 paths -- other routes into list 0%, terminal-tool peers 67%, seen in claude-desktop only
+   trajectory: terminal:list:suffix_tail:list:len:2:golden_path
+   window: 2-hop; peer bucket obs: 14; distinct paths in bucket: 2
+   cohort semantics: ordered paths sharing terminal tool and suffix peer bucket excludes focus path
+   list -> create -> reusable create success path: 100% success across 3 paths -- other routes into create 0%, terminal-tool peers 17%, seen in claude-desktop only
+   trajectory: terminal:create:suffix_tail:create:len:2:golden_path
+   window: 2-hop; peer bucket obs: 6; distinct paths in bucket: 2
+   cohort semantics: ordered paths sharing terminal tool and suffix peer bucket excludes focus path
+   -> Focus on the highest-lift failure endpoint first. Tighten the handoff into that terminal tool or add a safer bridge before the failing step.
+
+WARN  Dead tools (2)
+   evidence: credible finding (full claim)
+   why: The dataset supported the full claim, and the observed pattern cleared the emission threshold.
+   bulk_export -- 0 calls across analysis window (confidence: high)
+   delete_record -- 0 calls across analysis window (confidence: high)
+   -> Remove these tools, rename them, or improve their descriptions before adding more surface area.
+
+WARN  Client divergence (2)
+   evidence: credible finding (full claim)
+   why: The dataset supported the full claim, and the observed pattern cleared the emission threshold.
+   cursor averages 2 tools/session at 50% success -- peer baseline 84%
+   cursor.create errors 100% of calls -- peer baseline 33%
+   -> Review the worst client-specific path first. Divergence this large usually means descriptions, examples, or affordances are landing differently across clients.
+
+WARN  Argument mismatch patterns (2)
+   evidence: credible finding (full claim)
+   why: The dataset supported the full claim, and the observed pattern cleared the emission threshold.
+   create.userId missing in 56% of 9 calls
+   search.limit sent as array:string in 33% of 9 calls
+   -> Improve the descriptions or schemas for the highest-rate mismatches before shipping more tools around them.
+
+WARN  Session termination analysis (2)
+   evidence: credible finding (full claim)
+   why: The dataset supported the full claim, and the observed pattern cleared the emission threshold.
+   create ends 9/9 reached sessions (100%) -- possible_dead_end
+   list ends 17/20 reached sessions (85%) -- possible_dead_end
+   -> Shorten the path into a successful next action after this tool, or make the expected follow-up clearer.

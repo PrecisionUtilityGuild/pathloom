@@ -1,0 +1,42 @@
+name: Pathloom check
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  pathloom-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run unit tests
+        run: npm test
+
+      - name: Credibility gate and demo-pack reports
+        run: bash scripts/ci-gate.sh
+
+      - name: Upload Pathloom reports
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pathloom-reports
+          path: |
+            .pathloom-ci/report.json
+            .pathloom-ci/report.md
+            .pathloom-ci/check-summary.json
+          if-no-files-found: warn
